@@ -36,7 +36,7 @@ import {
   BugReportOutlined,
   TrendingUp as TrendingUpIcon,
   Close as CloseIcon,
-  UserAdd as UserPlusIcon,
+  PersonAdd as UserPlusIcon,
   Map as MapPinIcon,
   Schedule as ClockIcon,
   Edit as EditIcon,
