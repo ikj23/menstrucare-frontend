@@ -53,7 +53,13 @@ const LoginPage = () => {
         role: activeTab === 0 ? "user" : "admin",
       });
 
-      const { access_token } = response.data;
+      // ✅ FIXED: Safe destructuring with fallback
+      const access_token = response?.data?.access_token;
+      
+      if (!access_token) {
+        throw new Error("No access token received");
+      }
+
       localStorage.setItem("token", access_token);
 
       // ✅ Redirect based on role
@@ -166,7 +172,7 @@ const LoginPage = () => {
 
             {/* Sign Up Link */}
             <Typography variant="body1" sx={{ mt: 2 }}>
-              Don’t have an account?{" "}
+              Don't have an account?{" "}
               <Link
                 component="button"
                 variant="body1"

@@ -64,14 +64,20 @@ const SignUp = () => {
         role: activeTab === 0 ? "user" : "admin",
       });
 
-      const { access_token } = response.data;
+      // ✅ FIXED: Safe destructuring with fallback
+      const access_token = response?.data?.access_token;
+      
+      if (!access_token) {
+        throw new Error("No access token received");
+      }
+
       localStorage.setItem("token", access_token);
 
       // ✅ Redirect based on role
       navigate(activeTab === 0 ? "/user-dashboard" : "/admin-dashboard");
     } catch (err) {
       console.error("Signup error:", err);
-      setError(err.response?.data?.error || "Registration failed");
+      setError(err.response?.data?.error || "Registration failed. Please try again.");
     } finally {
       setLoading(false);
     }
